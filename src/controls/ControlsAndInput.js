@@ -8,6 +8,10 @@ class ControlsAndInput {
 		//playback button displayed in the top left of the screen
 		this.playbackButton = new PlaybackButton();
 
+		// File input to be displayed
+
+		this.fileInput = new FileInput();
+
 		//make the window fullscreen or revert to windowed
 		this.mousePressed = function () {
 			if (!this.playbackButton.hitCheck()) {
