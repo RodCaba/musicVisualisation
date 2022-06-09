@@ -4,19 +4,18 @@ class ControlsAndInput {
 	constructor() {
 
 		this.menuDisplayed = false;
+		this.controls = [];
 
-		//playback button displayed in the top left of the screen
-		this.playbackButton = new PlaybackButton();
+		// Function to add new controls
+		this.add = function(control){
+			this.controls.push(control);
+		}
 
-		// File input to be displayed
-
-		this.fileInput = new FileInput();
 
 		//make the window fullscreen or revert to windowed
 		this.mousePressed = function () {
-			if (!this.playbackButton.hitCheck()) {
-				let fs = fullscreen();
-				fullscreen(!fs);
+			for(let i = 0; i < this.controls.length; i++){
+				this.controls[i].hitCheck();
 			}
 		};
 
@@ -41,8 +40,10 @@ class ControlsAndInput {
 			strokeWeight(2);
 			textSize(34);
 
-			//playback button 
-			this.playbackButton.draw();
+			//Draw the controls in the this.controls array.
+			for(let i = 0; i < this.controls.length; i++){
+				this.controls[i].draw();
+			} 
 			//only draw the menu if menu displayed is set to true.
 			if (this.menuDisplayed) {
 
