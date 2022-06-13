@@ -11,6 +11,9 @@ class FullscreenButton extends Control{
       strokeWeight(4);
       stroke(255);
       rect(this.x, this.y, this.width, this.height);
+      strokeWeight(1);
+      textSize(9)
+      text("FS", this.x + (this.width/2) - 5, this.y + (this.height/2)+2)
     }
 
     this.hitCheck = function (){
