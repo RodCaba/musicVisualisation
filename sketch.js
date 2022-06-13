@@ -15,6 +15,9 @@ function setup() {
 	createCanvas(windowWidth, windowHeight);
 	background(0);
 	controls = new ControlsAndInput();
+	controls.add(new PlaybackButton());
+	controls.add(new FileInput());
+	controls.add(new FullscreenButton());
 
 	//instantiate the fft object
 	fourier = new p5.FFT();

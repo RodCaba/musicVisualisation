@@ -1,7 +1,7 @@
 //displays and handles clicks on the playback button.
-class PlaybackButton {
+class PlaybackButton extends Control{
 	constructor() {
-
+		super();
 		this.x = 20;
 		this.y = 20;
 		this.width = 20;
