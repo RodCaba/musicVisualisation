@@ -18,6 +18,7 @@ function setup() {
 	controls.add(new PlaybackButton());
 	controls.add(new FileInput());
 	controls.add(new FullscreenButton());
+	controls.add(new BPMControl());
 
 	//instantiate the fft object
 	fourier = new p5.FFT();
