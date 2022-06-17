@@ -7,6 +7,8 @@ let sound = null;
 //variable for p5 fast fourier transform
 let fourier;
 
+
+
 function preload() {
 	sound = loadSound('assets/stomper_reggae_bit.mp3');
 }
@@ -14,6 +16,7 @@ function preload() {
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	background(0);
+
 	controls = new ControlsAndInput();
 	controls.add(new PlaybackButton());
 	controls.add(new FileInput());
@@ -22,12 +25,14 @@ function setup() {
 	//instantiate the fft object
 	fourier = new p5.FFT();
 
+
 	//create a new visualisation container and add visualisations
 	vis = new Visualisations();
 	vis.add(new Spectrum());
 	vis.add(new WavePattern());
 	vis.add(new Needles());
 	vis.add(new RidgePlots());
+	vis.add(new Blocks());
 }
 
 function draw() {
