@@ -7,6 +7,16 @@ let sound = null;
 //variable for p5 fast fourier transform
 let fourier;
 
+// Add GUI for BPM control
+let bpmParams = {
+	//set PlayBack Rate
+	playBackRate: 1.0,
+	playBackRateMin: 0.95,
+	playBackRateMax: 1.05,
+	playBackRateStep: 0.01
+}
+
+
 function preload() {
 	sound = loadSound('assets/stomper_reggae_bit.mp3');
 }
@@ -14,7 +24,7 @@ function preload() {
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	background(0);
-
+	
 	controls = new ControlsAndInput();
 	controls.add(new PlaybackButton());
 	controls.add(new FileInput());
