@@ -14,6 +14,7 @@ function preload() {
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	background(0);
+
 	controls = new ControlsAndInput();
 	controls.add(new PlaybackButton());
 	controls.add(new FileInput());
@@ -29,6 +30,7 @@ function setup() {
 	vis.add(new WavePattern());
 	vis.add(new Needles());
 	vis.add(new RidgePlots());
+	vis.add(new NoiseLines());
 }
 
 function draw() {
