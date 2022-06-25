@@ -6,11 +6,13 @@ class FileInput extends Control{
     this.textLength = 50;
 
     this.text = "Load a song to start!";
+    this.playing = false;
 
     this.input = createFileInput(file => {
       if(file.type === "audio"){
         sound = loadSound(file);
         this.changeText(`Now playing: ${file.name}`);
+        this.playing = true;
       }
       else{
         console.log("Fail")
@@ -38,5 +40,29 @@ class FileInput extends Control{
         this.text = string;
     };
   };
+  // Getters
 
+  getPlayingState(){
+    return this.playing;
+  }
+  //Setters
+  setPlayingState(value){
+    this.playing = value;
+  }
+
+  setFileInputText (string){
+    if(this.playing)
+      return;
+    // This as when combined with the file input control may cause an error.
+    // TODO: fix the bug of combined controls. 
+    try{
+      let strings = string.split("/");
+      let songString = strings[strings.length - 1];
+      let splitExtension = songString.split(".mp3");
+      let songName = splitExtension[0]
+      this.changeText(`Now playing: ${songName}`);
+    }catch(e){
+      console.log(e);
+    }
+  };
 }

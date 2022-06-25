@@ -13,9 +13,13 @@ let bpmParams = {
 	playBackRate: 1.0,
 	playBackRateMin: 0.95,
 	playBackRateMax: 1.05,
-	playBackRateStep: 0.01
-}
+	playBackRateStep: 0.01,
+};
 
+// Global variables for communication between controls
+let playBackButton;
+let playlistControl;
+let fileInput;
 
 function preload() {
 	sound = loadSound('assets/stomper_reggae_bit.mp3');
@@ -24,13 +28,18 @@ function preload() {
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	background(0);
-	
+
 	controls = new ControlsAndInput();
-	controls.add(new PlaybackButton());
-	controls.add(new FileInput());
+
+	playBackButton = new PlaybackButton();
+	playlistControl = new PlaylistControl();
+	fileInput = new FileInput();
+
+	controls.add(playBackButton);
+	controls.add(fileInput);
 	controls.add(new FullscreenButton());
 	controls.add(new BPMControl());
-	controls.add(new PlaylistControl());
+	controls.add(playlistControl);
 
 	//instantiate the fft object
 	fourier = new p5.FFT();
@@ -50,6 +59,19 @@ function draw() {
 	vis.selectedVisual.draw();
 	//draw the controls on top.
 	controls.draw();
+
+	playBackButton.setPlayingState(sound.isLooping());
+
+	let playListPlaying = playlistControl.getPlayingState();
+	let fileInputPlaying = fileInput.getPlayingState();
+
+	if(playListPlaying){
+		fileInput.setPlayingState(false);
+		fileInput.setFileInputText(sound.file);
+	}
+	if(fileInputPlaying){
+		playlistControl.setPlayingState(false);
+	}
 }
 
 function mouseClicked() {

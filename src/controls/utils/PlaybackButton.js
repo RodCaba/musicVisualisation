@@ -36,6 +36,8 @@ class PlaybackButton extends Control{
 			}
 			return false;
 		};
-
+	}
+	setPlayingState(value){
+		this.playing = value;
 	}
 }
