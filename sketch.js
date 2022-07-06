@@ -29,6 +29,10 @@ function setup() {
 	createCanvas(windowWidth, windowHeight);
 	background(0);
 
+	// Change frame rate for firework visualisation. 
+	frameRate(60);
+	angleMode("DEGREES");
+
 	controls = new ControlsAndInput();
 
 	playBackButton = new PlaybackButton();
@@ -51,6 +55,7 @@ function setup() {
 	vis.add(new Needles());
 	vis.add(new RidgePlots());
 	vis.add(new NoiseLines());
+	vis.add(new FireWorks());
 }
 
 function draw() {
