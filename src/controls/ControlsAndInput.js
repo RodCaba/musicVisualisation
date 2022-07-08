@@ -29,8 +29,17 @@ class ControlsAndInput {
 			if (keycode > 48 && keycode < 58) {
 				let visNumber = keycode - 49;
 				vis.selectVisual(vis.visuals[visNumber].name);
+			};
+			for(let control of this.controls){
+				if(control.constructor == MIDIKeyboard) control.keyPressed(keycode);
 			}
 		};
+
+		this.keyReleased = function(){
+			for(let control of this.controls){
+				if(control.constructor == MIDIKeyboard) control.keyReleased();
+			}
+		}
 
 		//draws the playback button and potentially the menu
 		this.draw = function () {

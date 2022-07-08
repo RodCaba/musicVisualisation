@@ -7,9 +7,11 @@ class Particle{
     this.speed = speed;
 
     this.draw = function(){
+      push();
       fill(this.colour);
       ellipse(this.x, this.y, 5, 5);
       this.update();
+      pop();
     }
 
     this.update = function(){

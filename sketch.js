@@ -44,6 +44,7 @@ function setup() {
 	controls.add(new FullscreenButton());
 	controls.add(new BPMControl());
 	controls.add(playlistControl);
+	controls.add(new MIDIKeyboard());
 
 	//instantiate the fft object
 	fourier = new p5.FFT();
@@ -85,6 +86,10 @@ function mouseClicked() {
 
 function keyPressed() {
 	controls.keyPressed(keyCode);
+}
+
+function keyReleased(){
+	controls.keyReleased();
 }
 
 //when the window has been resized. Resize canvas to fit
