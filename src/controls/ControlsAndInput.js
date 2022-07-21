@@ -13,7 +13,7 @@ class ControlsAndInput {
 
 
 		//make the window fullscreen or revert to windowed
-		this.mousePressed = function () {
+		this.mouseClicked = function () {
 			for(let i = 0; i < this.controls.length; i++){
 				this.controls[i].hitCheck();
 			}
@@ -38,6 +38,12 @@ class ControlsAndInput {
 		this.keyReleased = function(){
 			for(let control of this.controls){
 				if(control.constructor == MIDIKeyboard) control.keyReleased();
+			}
+		}
+
+		this.mousePressed = function(){
+			for(let control of this.controls){
+				if(control.constructor == EffectsPad) control.hitCheck();
 			}
 		}
 
