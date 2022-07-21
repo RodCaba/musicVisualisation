@@ -57,6 +57,7 @@ function setup() {
 	vis.add(new RidgePlots());
 	vis.add(new NoiseLines());
 	vis.add(new FireWorks());
+	vis.add(new Circle());
 }
 
 function draw() {
