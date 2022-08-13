@@ -29,15 +29,16 @@ function setup() {
 	createCanvas(windowWidth, windowHeight);
 	background(0);
 
-	// Change frame rate for firework visualisation. 
+	// Change frame rate for firework visualisation.
 	frameRate(60);
-	angleMode("DEGREES");
+	angleMode('DEGREES');
 
 	controls = new ControlsAndInput();
 
 	playBackButton = new PlaybackButton();
 	playlistControl = new PlaylistControl();
 	fileInput = new FileInput();
+	effectsPad = new EffectsPad(sound);
 
 	controls.add(playBackButton);
 	controls.add(fileInput);
@@ -45,7 +46,7 @@ function setup() {
 	controls.add(new BPMControl());
 	controls.add(playlistControl);
 	controls.add(new MIDIKeyboard());
-	controls.add(new EffectsPad());
+	controls.add(effectsPad);
 
 	//instantiate the fft object
 	fourier = new p5.FFT();
@@ -73,12 +74,21 @@ function draw() {
 	let playListPlaying = playlistControl.getPlayingState();
 	let fileInputPlaying = fileInput.getPlayingState();
 
-	if(playListPlaying){
+	if (playListPlaying) {
 		fileInput.setPlayingState(false);
 		fileInput.setFileInputText(sound.file);
+		if(effectsPad.getChangesInSoundFile() == 0){
+			effectsPad.setEffectsSound(sound);
+			effectsPad.setChangesInSoundFile(1);
+		}
+		if(playlistControl.getChangeInSound()){
+			effectsPad.setEffectsSound(sound);
+			playlistControl.setChangeInSound(false);
+		}
 	}
-	if(fileInputPlaying){
+	if (fileInputPlaying) {
 		playlistControl.setPlayingState(false);
+		effectsPad.setEffectsSound(sound)
 	}
 }
 
@@ -90,11 +100,11 @@ function keyPressed() {
 	controls.keyPressed(keyCode);
 }
 
-function keyReleased(){
+function keyReleased() {
 	controls.keyReleased();
 }
 
-function mousePressed(){
+function mousePressed() {
 	controls.mousePressed();
 }
 //when the window has been resized. Resize canvas to fit
