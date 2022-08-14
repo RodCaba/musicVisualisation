@@ -60,6 +60,7 @@ function setup() {
 	vis.add(new NoiseLines());
 	vis.add(new FireWorks());
 	vis.add(new Circle());
+	vis.add(new SandStorm());
 }
 
 function draw() {
@@ -77,18 +78,18 @@ function draw() {
 	if (playListPlaying) {
 		fileInput.setPlayingState(false);
 		fileInput.setFileInputText(sound.file);
-		if(effectsPad.getChangesInSoundFile() == 0){
+		if (effectsPad.getChangesInSoundFile() == 0) {
 			effectsPad.setEffectsSound(sound);
 			effectsPad.setChangesInSoundFile(1);
 		}
-		if(playlistControl.getChangeInSound()){
+		if (playlistControl.getChangeInSound()) {
 			effectsPad.setEffectsSound(sound);
 			playlistControl.setChangeInSound(false);
 		}
 	}
 	if (fileInputPlaying) {
 		playlistControl.setPlayingState(false);
-		effectsPad.setEffectsSound(sound)
+		effectsPad.setEffectsSound(sound);
 	}
 }
 

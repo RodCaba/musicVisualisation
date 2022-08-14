@@ -58,16 +58,19 @@ class ControlsAndInput {
 			fill('white');
 			stroke('black');
 			strokeWeight(2);
-			textSize(34);
+			textSize(18);
 
-			//Draw the controls in the this.controls array.
-			for (let i = 0; i < this.controls.length; i++) {
-				this.controls[i].draw();
-			}
 			//only draw the menu if menu displayed is set to true.
 			if (this.menuDisplayed) {
 				text('Select a visualisation:', 100, 30);
 				this.menu();
+			}
+			pop();
+
+			push();
+			//Draw the controls in the this.controls array.
+			for (let i = 0; i < this.controls.length; i++) {
+				this.controls[i].draw();
 			}
 			pop();
 		};
