@@ -24,7 +24,7 @@ class NoiseLines extends Vis {
 			// Big blue figure for bass range
 
 			noFill();
-
+			// Yellow figure for treble range
 			beginShape();
 			stroke(255, 255, 0);
 			for(let i =0; i < 100; i++){
@@ -35,6 +35,7 @@ class NoiseLines extends Vis {
 					-600,
 					-400
 				);
+				// The range of the y axis would increase as the bass energy increases.
 				let y = map(
 					noise(i * this.noiseStep + this.progTreble + 50 ),
 					0,
@@ -46,6 +47,7 @@ class NoiseLines extends Vis {
 			}
 			endShape();
 
+			// Red figure for high mid range
 			beginShape();
 			stroke(255, 0, 0);
 			for (let i = 0; i < 100; i++) {
@@ -67,6 +69,7 @@ class NoiseLines extends Vis {
 			}
 			endShape();
 
+			// Green figure for low mid range
 			beginShape();
 			stroke(0, 255, 0);
 			for (let i = 0; i < 100; i++) {
@@ -82,6 +85,7 @@ class NoiseLines extends Vis {
 			}
 			endShape();
 
+			// Blue figure for bass range
 			beginShape();
 			stroke(0, 0, 255);
 			for (let i = 0; i < 100; i++) {
@@ -97,6 +101,7 @@ class NoiseLines extends Vis {
 			}
 			endShape();
 
+			// Checking the energy tresholds, if it passes then the progression is added. 
 			if (bassEnergy > 80) {
 				this.progBass += 0.05;
 			}

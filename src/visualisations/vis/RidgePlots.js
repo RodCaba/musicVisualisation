@@ -21,9 +21,11 @@ class RidgePlots extends Vis {
           ii. Each frame clear the screen and decrease the y coordinate of each line
           iii. If line y is smaller than plot y then remove from the array. 
       */
+			push();
 			background(0);
 			stroke(255);
 			strokeWeight(2);
+			noFill();
 			if (frameCount % 30 === 0) this.addWave();
 
 			for (let i = 0; i < this.lines.length; i++) {
@@ -38,6 +40,7 @@ class RidgePlots extends Vis {
 					this.lines.splice(i, 1);
 				}
 			}
+			pop();
 		};
 
 		this.addWave = function () {

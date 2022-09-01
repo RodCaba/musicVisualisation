@@ -95,6 +95,9 @@ function draw() {
 
 function mouseClicked() {
 	controls.mouseClicked();
+	if (vis.selectedVisual.hasOwnProperty('hitCheck')) {
+		vis.selectedVisual.hitCheck();
+	}
 }
 
 function keyPressed() {

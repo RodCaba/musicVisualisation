@@ -5,7 +5,7 @@ class FullscreenButton extends Control{
     this.y = 60;
     this.width = 20;
     this.height = 20;
-
+    // Decided to use a virtual button instead of a key press event to enter fullscreen. It is a better user experience.
     this.draw = function (){
       noFill();
       strokeWeight(4);

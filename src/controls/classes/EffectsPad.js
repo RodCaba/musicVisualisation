@@ -1,13 +1,13 @@
 class EffectsPad extends Control {
 	constructor(sound) {
 		super();
-		this.x = width * (2 / 3);
+		this.x = width * (4 / 5);
 		this.y = 220;
-		this.width = 350;
+		this.width = 130;
 		this.height = 130;
 		this.sound = sound;
 		this.changesInSoundFile = 0;
-
+		// We create a new Effect array, the class is imported from the models folder.
 		this.effects = [
 			new Effect(
 				'Delay',
@@ -17,16 +17,8 @@ class EffectsPad extends Control {
 				[sound, 0.12, 0.7, 2300],
 				[sound, 0, 0, 0]
 			),
-			new Effect(
-				'Reverb',
-				color(255, 215, 0),
-				color(255, 0, 0),
-				new p5.Reverb(),
-				[sound],
-				[sound, 0, 0]
-			),
 		];
-
+		// We give a value for when is created to be processed, and values of 0 to stop processing the effect
 		this.effectProperties = [
 			{
 				name: 'Delay',
@@ -35,14 +27,6 @@ class EffectsPad extends Control {
 				effect: new p5.Delay(),
 				processParams: [0.12, 0.7, 2300],
 				unProcessParams: [0, 0, 0],
-			},
-			{
-				name: 'Reverb',
-				color: color(255, 215, 0),
-				secondaryColor: color(255, 0, 0),
-				effect: new p5.Reverb(),
-				processParams: [],
-				unProcessParams: [0, 0],
 			},
 		];
 
@@ -55,6 +39,8 @@ class EffectsPad extends Control {
 		};
 
 		this.draw = function () {
+			let fs = fullscreen();
+			if (fs) return;
 			push();
 			fill(125, 125, 125);
 			rect(this.x, this.y, this.width, this.height);
@@ -75,7 +61,11 @@ class EffectsPad extends Control {
 				if (this.effects[i].pressedState) fill(this.effects[i].secondaryColor);
 				else fill(0);
 				textSize(16);
-				text(this.effects[i].name, effectX + 20, this.effectsPadProperties.initialY+50);
+				text(
+					this.effects[i].name,
+					effectX + 20,
+					this.effectsPadProperties.initialY + 50
+				);
 			}
 			pop();
 		};
@@ -96,14 +86,14 @@ class EffectsPad extends Control {
 				}
 			}
 		};
-
+		// This would be handy, as we need to keep count of the changes in sound file that we have made. So the effect can be used in both, the file input and the playlists.
 		this.increaseChangesInSoundFile = function () {
 			this.changesInSoundFile += 1;
 		};
 	}
 	setEffectsSound(value) {
 		// This function will crate a new effect list with the sound value that has changed.
-		// TODO: Change the playlist and input file functions to be activated in the callback of loadsound
+
 		let newEffects = [];
 		for (let effectProperty of this.effectProperties) {
 			let newEffect = new Effect(
@@ -118,11 +108,11 @@ class EffectsPad extends Control {
 		}
 		this.effects = newEffects;
 	}
-
+	// Getters
 	getChangesInSoundFile() {
 		return this.changesInSoundFile;
 	}
-
+	// Setters
 	setChangesInSoundFile(value) {
 		this.changesInSoundFile = value;
 	}

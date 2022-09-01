@@ -20,6 +20,8 @@ class PlaylistControl extends Control {
 			height: 15,
 			span: -10,
 		};
+		// This songs are public assets of the program, it is included in the assets file.
+		// This could be easily extended to include more songs. 
 		this.playlists = [
 			new Playlist('Latin Party', [
 				'../../assets/playlists/latinParty/Formentera - Aitana Nicki Nicole.mp3',
@@ -47,6 +49,7 @@ class PlaylistControl extends Control {
 		for (let playlist of this.playlists) {
 			this.selector.option(playlist.name);
 		}
+		// Check for the name of the value selected in the selector, and look for the playlist with that name.
 		this.selector.changed(() => {
 			for (let playlist of this.playlists) {
 				if (playlist.name === this.selector.value()) {
@@ -58,9 +61,16 @@ class PlaylistControl extends Control {
 		});
 
 		this.draw = function () {
+			let fs = fullscreen();
+			if (fs) {
+				this.selector.hide();
+				return;
+			}
+			else{
+				this.selector.show();
+			}
 			fill(255);
 			if (!this.playing) {
-				// TODO: Solve bug that when the playlist is selected in shrinks the menu text
 				push();
 				textSize(16);
 				text(
@@ -115,6 +125,7 @@ class PlaylistControl extends Control {
 			}
 		};
 		this.hitCheck = function () {
+			// Check if forward button is hit. If it is, change the selected song to the next song.
 			if (
 				mouseX > this.forwardButton.x &&
 				mouseX <
@@ -135,6 +146,7 @@ class PlaylistControl extends Control {
 					}
 				}
 			}
+			// Check if backward button is hit. If it is, change the selected song to the previous song.
 			if (
 				mouseX >
 					this.backwardButton.x -

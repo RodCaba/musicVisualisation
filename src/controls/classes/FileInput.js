@@ -4,7 +4,7 @@ class FileInput extends Control {
 		this.x = width * (3 / 4);
 		this.y = 70;
 		this.textLength = 50;
-
+		// Initial state of the control
 		this.text = 'Load a song to start!';
 		this.playing = false;
 
@@ -16,6 +16,7 @@ class FileInput extends Control {
 			}
 		});
 		this.input.position(this.x, this.y);
+
 		this.handleFile = function (file, self) {
 			if (file.type === 'audio') {
 				sound = loadSound(
@@ -27,7 +28,8 @@ class FileInput extends Control {
 					function fail() {
 						alert('File not supported :(');
 					},
-					function whileLoading() {
+					function whileLoading(loaded) {
+						console.log(loaded);
 						self.changeText('Loading...');
 					}
 				);
@@ -35,12 +37,20 @@ class FileInput extends Control {
 		};
 
 		this.draw = function () {
+			let fs = fullscreen();
+			if (fs) {
+				this.input.hide();
+				return;
+			} else {
+				this.input.show();
+			}
 			push();
 			fill(255);
 			textSize(16);
 			text(this.text, this.x - 100, this.y - 20);
 			pop();
 		};
+		// As we don't need a hitcheck function, we just return.
 		this.hitCheck = function () {
 			return;
 		};
@@ -62,8 +72,6 @@ class FileInput extends Control {
 
 	setFileInputText(string) {
 		if (this.playing) return;
-		// This as when combined with the file input control may cause an error.
-		// TODO: fix the bug of combined controls.
 		try {
 			let strings = string.split('/');
 			let songString = strings[strings.length - 1];
